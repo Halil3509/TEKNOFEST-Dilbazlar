@@ -1,0 +1,13 @@
+from scraping import scrape_posts_and_comments, number_of_subreddit
+from tqdm import tqdm
+
+subreddit_names = ["Agoraphobia"]
+
+for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
+    number_of_submissions = number_of_subreddit(subreddit_name)
+
+    # Scraping
+    df = scrape_posts_and_comments(subreddit_name=subreddit_name, total_posts=number_of_submissions, posts_per_iteration=100)
+
+    df.to_csv(f"Data/{subreddit_name}.csv", index=False)
+    print(f"{subreddit_name} was saved.")
