@@ -5,9 +5,13 @@ import json
 import time
 from groq import Groq
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 client = Groq(
-    api_key="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",
+    api_key=os.getenv('GROQ-API'),
 )
 
 
@@ -27,7 +31,7 @@ def submission_prediction(submission_text: str):
             },
             {
                 "role": "user",
-                "content": f"""
+                "content": """
                         For the following subreddit submission text (enclosed in triple backticks), analyze whether it 
                         describes the stories (not recovery story), feelings (not recovered feelings), or behaviors 
                         (not recovered feelings) of a patient with a mental disorder. Respond according to these guidelines:
@@ -46,7 +50,7 @@ def submission_prediction(submission_text: str):
                             {"Result":"no", "Text": "<write here given_input_text>"}
 
                         \n\n
-                        Subreddit Submission Text: {submission_text}"""
+                        Subreddit Submission Text: """ + submission_text
             }
         ],
         model="llama3-70b-8192",
@@ -107,7 +111,6 @@ def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
     for post_body in tqdm(df['post_body'].unique(), desc=f"LLM filtering"):
         try:
             response_text = submission_prediction(submission_text=post_body)
-            print("Response Text: ", response_text)
 
             # Extract JSON
             pattern = re.compile(r'\{.*?\}', re.DOTALL)
@@ -121,7 +124,7 @@ def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
                     # Get specific comments
                     comment_df = df[df['post_body'] == post_body]
                     comment_list = filter_comments_using_llm(comment_df)
-                    time.sleep(0.21)
+                    time.sleep(2.1)
 
                     # Extending due to the fact that filter_comments_using_llm method returns in list format
                     filtered_llm_result_list.extend(comment_list)
@@ -152,7 +155,7 @@ def filter_comments_using_llm(comment_df: pd.DataFrame) -> list:
         for comment_body in tqdm(comment_df['comment_body']):
 
             response_comment_str = comment_prediction(comment_text=comment_body)
-            time.sleep(0.21)
+            time.sleep(2.1)
 
             # Extract JSON
             pattern = re.compile(r'\{.*?\}', re.DOTALL)
