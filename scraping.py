@@ -1,84 +1,40 @@
-import praw
+import tweepy
+import json
 import pandas as pd
-from tqdm import tqdm
 
-reddit = praw.Reddit(
-    client_id="WsH2mzukYSiFLtYATnkq5A",
-    client_secret="HIR6kQSv7hbODotpnhsXN6KVqxA7iQ",
-    user_agent="temp",
-)
+# Twitter API credentials
+api_key = "8i8RsaEZKD7XQGMFWscSu07li"
+api_secret_key = "zogU75qnVGVHVlQ8Ke074V0uvg6Yh9pp4N8Rxwx2vfKBHyHl5S"
+access_token = "1550200058477481987-SApDlK998C0mYyaq2knLxXmJ3saxQ2"
+access_token_secret = "5B4NUOpuyxZO8HXszzEbohdsC0jcAE8e2Aoflz7TX70vx"
 
+# Authenticate to Twitter
+auth = tweepy.OAuthHandler(api_key, api_secret_key)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 
-def scrape_posts_and_comments(subreddit_name, total_posts, posts_per_iteration):
-    """
+# Define the search query
+search_query = "sosyal anksiyetem -filter:retweets"
 
-    :param subreddit_name:
-    :param total_posts:
-    :param posts_per_iteration:
-    :return:
-    """
-    subreddit = reddit.subreddit(subreddit_name)
-    posts_data = []
-    scraped_posts = 0
-    after = None
+# Collect tweets
+tweets = tweepy.Cursor(api.search_tweets,
+                       q=search_query,
+                       lang="tr",
+                       tweet_mode='extended').items(1000)
 
-    try:
-        with tqdm(total=total_posts, desc=f"Scraping for {subreddit_name}") as pbar:
-            while scraped_posts < total_posts:
-                submissions = subreddit.new(limit=posts_per_iteration, params={'after': after})
-                submission_list = list(submissions)
-                if not submission_list:
-                    break
+# Create a list to store
 
-                for submission in submission_list:
-                    submission.comments.replace_more(limit=0)
-                    comments = submission.comments.list()
+# Create a list to store tweet texts
+tweets_list = []
 
-                    for comment in comments:
-                        posts_data.append({
-                            'post_id': submission.id,
-                            'post_title': submission.title,
-                            'post_body': submission.selftext,
-                            'post_score': submission.score,
-                            'post_url': submission.url,
-                            'post_created': submission.created_utc,
-                            'comment_id': comment.id,
-                            'comment_body': comment.body,
-                            'comment_score': comment.score,
-                            'comment_created': comment.created_utc,
-                        })
+for tweet in tweets:
+    tweets_list.append(tweet.full_text)
 
-                    scraped_posts += 1
-                    pbar.update(1)
-                    if scraped_posts >= total_posts:
-                        break
+# Convert list to DataFrame
+df = pd.DataFrame(tweets_list, columns=['post_body'])
 
-                if len(submission_list) > 0:
-                    after = submission_list[-1].fullname
-                else:
-                    break
+# Display the DataFrame
+print(df.head())
 
-        return pd.DataFrame(posts_data)
-
-    except Exception as err:
-        print(err)
-        pass
-
-
-def number_of_subreddit(subreddit_name: str):
-    """
-
-    :param subreddit_name:
-    :return:
-    """
-    print("The number of submissions for " + subreddit_name + "measuring...")
-    subreddit = reddit.subreddit(subreddit_name)
-
-    submission_count = 0
-
-    for _ in subreddit.new(limit=None):
-        submission_count += 1
-
-    print(f"Total number of submissions for {subreddit_name} in r/{subreddit_name}: {submission_count}")
-
-    return submission_count
+# Save DataFrame to a CSV file
+df.to_csv("scrapped_social_anxiety_tweets.csv", index=False)
