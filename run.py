@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 # subreddit_names = ["panicdisorder", "selectivemutism", "Anxiety", "generalizedanxiety", "Phobia", "socialanxiety"]
 # "Agoraphobia" was already scraped
-
+# halil
 subreddit_names = ["panicdisorder"]
 
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
