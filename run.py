@@ -3,10 +3,8 @@ from llm_filtering import filter_using_llm
 from tqdm import tqdm
 
 
-# subreddit_names = ["panicdisorder", "selectivemutism", "Anxiety", "generalizedanxiety", "Phobia", "socialanxiety"]
 # "Agoraphobia" was already scraped
-
-subreddit_names = ["panicdisorder"]
+subreddit_names = ["socialanxiety"]
 
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
     number_of_submissions = number_of_subreddit(subreddit_name)
