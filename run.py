@@ -4,10 +4,10 @@ from tqdm import tqdm
 
 subreddit_names = ["panicdisorder", "selectivemutism", "Anxiety", "generalizedanxiety", "Phobia", "socialanxiety"]  # "Agoraphobia" was already scraped
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
-    number_of_submissions = number_of_subreddit(subreddit_name)
+    # number_of_submissions = number_of_subreddit(subreddit_name)
 
     # Scraping
-    df = scrape_posts_and_comments(subreddit_name=subreddit_name, total_posts=number_of_submissions, posts_per_iteration=100)
+    df = scrape_posts_and_comments(subreddit_name=subreddit_name, total_posts=10, posts_per_iteration=100)
 
     llm_filtered_df = filter_using_llm(df=df)
 
