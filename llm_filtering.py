@@ -4,9 +4,12 @@ import re
 import pandas as pd
 import json
 import time
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-genai.configure(api_key="AIzaSyDzn6ERBoFX0fp-s00L364BCQOnHFV4uO4")
+genai.configure(api_key=os.getenv('GEMINI_API'))
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -73,6 +76,7 @@ def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
     for post_body in tqdm(df['post_body'].unique(), desc=f"LLM filtering"):
         try:
             response_text = submission_prediction(submission_text=post_body)
+            time.sleep(4.1)
 
             # Extract JSON
             pattern = re.compile(r'\{.*?\}', re.DOTALL)
@@ -116,6 +120,7 @@ def filter_comments_using_llm(comment_df: pd.DataFrame) -> list:
         for comment_body in tqdm(comment_df['comment_body']):
 
             response_comment_str = comment_prediction(comment_text=comment_body)
+            time.sleep(4.1)
 
             # Extract JSON
             pattern = re.compile(r'\{.*?\}', re.DOTALL)
