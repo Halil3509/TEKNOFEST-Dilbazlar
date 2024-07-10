@@ -75,7 +75,7 @@ def comment_prediction(comment_text: str) -> str:
             },
             {
                 "role": "user",
-                "content": f"""
+                "content": """
                 For the following subreddit submission text (enclosed in triple backticks), analyze whether it describes 
                 the stories (not recovery story), feelings (not recovered feelings), or behaviors 
                 (not recovered feelings) of a patient with a mental disorder. Respond according to these guidelines:
@@ -90,8 +90,8 @@ def comment_prediction(comment_text: str) -> str:
                     {"Result":"no", "Text": "<write here given_input_text>"}
 
                 \n\n
-                Subreddit Submission Text: {comment_text}"""
-            }
+                Subreddit Submission Text: """ + comment_text
+             }
         ],
         model="llama3-70b-8192",
     )
