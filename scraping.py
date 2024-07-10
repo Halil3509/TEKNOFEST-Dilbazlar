@@ -9,54 +9,52 @@ reddit = praw.Reddit(
 )
 
 
-def scrape_posts_and_comments(subreddit_name, total_posts, posts_per_iteration):
+def scrape_posts_and_comments(subreddit_name):
     """
+    Only scraping side of submissions and their comments and make them a tabular data.
 
     :param subreddit_name:
-    :param total_posts:
-    :param posts_per_iteration:
     :return:
     """
     subreddit = reddit.subreddit(subreddit_name)
     posts_data = []
     scraped_posts = 0
-    after = None
 
     try:
-        with tqdm(total=total_posts, desc=f"Scraping for {subreddit_name}") as pbar:
-            while scraped_posts < total_posts:
-                submissions = subreddit.new(limit=posts_per_iteration, params={'after': after})
-                submission_list = list(submissions)
-                if not submission_list:
-                    break
 
-                for submission in submission_list:
-                    submission.comments.replace_more(limit=0)
-                    comments = submission.comments.list()
+        submission_list = list(subreddit.new(limit=None))
+        print("After New: ", len(submission_list))
+        submission_list.extend(list(subreddit.hot(limit=None)))
+        print("After Hot: ", len(submission_list))
+        submission_list.extend(list(subreddit.top(limit=None)))
+        print("After Top: ", len(submission_list))
+        submission_list.extend(list(subreddit.rising(limit=None)))
+        print("After Rising: ", len(submission_list))
 
-                    for comment in comments:
-                        posts_data.append({
-                            'post_id': submission.id,
-                            'post_title': submission.title,
-                            'post_body': submission.selftext,
-                            'post_score': submission.score,
-                            'post_url': submission.url,
-                            'post_created': submission.created_utc,
-                            'comment_id': comment.id,
-                            'comment_body': comment.body,
-                            'comment_score': comment.score,
-                            'comment_created': comment.created_utc,
-                        })
+        # Get unique values
+        print(f"Total value of {subreddit_name}:", len(set(submission_list)))
 
-                    scraped_posts += 1
-                    pbar.update(1)
-                    if scraped_posts >= total_posts:
-                        break
+        with tqdm(total=len(set(submission_list)), desc=f"Scraping for {subreddit_name}") as pbar:
+            for submission in list(set(submission_list)):
+                submission.comments.replace_more(limit=0)
+                comments = submission.comments.list()
 
-                if len(submission_list) > 0:
-                    after = submission_list[-1].fullname
-                else:
-                    break
+                for comment in comments:
+                    posts_data.append({
+                        'post_id': submission.id,
+                        'post_title': submission.title,
+                        'post_body': submission.selftext,
+                        'post_score': submission.score,
+                        'post_url': submission.url,
+                        'post_created': submission.created_utc,
+                        'comment_id': comment.id,
+                        'comment_body': comment.body,
+                        'comment_score': comment.score,
+                        'comment_created': comment.created_utc,
+                    })
+
+                scraped_posts += 1
+                pbar.update(1)
 
         return pd.DataFrame(posts_data)
 
@@ -64,21 +62,3 @@ def scrape_posts_and_comments(subreddit_name, total_posts, posts_per_iteration):
         print(err)
         pass
 
-
-def number_of_subreddit(subreddit_name: str):
-    """
-
-    :param subreddit_name:
-    :return:
-    """
-    print("The number of submissions for " + subreddit_name + "measuring...")
-    subreddit = reddit.subreddit(subreddit_name)
-
-    submission_count = 0
-
-    for _ in subreddit.new(limit=None):
-        submission_count += 1
-
-    print(f"Total number of submissions for {subreddit_name} in r/{subreddit_name}: {submission_count}")
-
-    return submission_count
