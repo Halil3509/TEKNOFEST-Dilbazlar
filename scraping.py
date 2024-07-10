@@ -1,6 +1,7 @@
 import praw
 import pandas as pd
 from tqdm import tqdm
+import time
 
 reddit = praw.Reddit(
     client_id="WsH2mzukYSiFLtYATnkq5A",
@@ -56,9 +57,12 @@ def scrape_posts_and_comments(subreddit_name):
                 scraped_posts += 1
                 pbar.update(1)
 
-        return pd.DataFrame(posts_data)
+                if scraped_posts % 500 == 0:
+                    print("Breath Dude")
+                    time.sleep(120)
 
     except Exception as err:
         print(err)
         pass
 
+    return pd.DataFrame(posts_data)
