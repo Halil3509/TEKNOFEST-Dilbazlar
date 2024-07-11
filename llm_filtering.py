@@ -5,13 +5,11 @@ import json
 import time
 from groq import Groq
 
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
 
 client = Groq(
-    api_key=os.getenv('GROQ-API'),
+    api_key="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"
 )
 
 
