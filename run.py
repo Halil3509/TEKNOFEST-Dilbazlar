@@ -2,6 +2,8 @@ from scraping import scrape_posts_and_comments
 from llm_filtering import filter_using_llm
 from tqdm import tqdm
 import sys
+import os
+import pandas as pd
 
 if len(sys.argv) > 1:
     # If an argument is provided, use it
@@ -12,15 +14,20 @@ else:
 
 
 # Define list
-subreddit_names = ["Phobia", "selectivemutism"]
+subreddit_names = ["panicdisorder"]
 
 
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
 
-    # Scraping
-    df = scrape_posts_and_comments(subreddit_name=subreddit_name)
-    df.to_csv(f"Data/{subreddit_name}_pure_en.csv", index=False)
-    print(f"{subreddit_name} pure data was saved.")
+    # If your process is incomplete.
+    if f"{subreddit_name}_pure.csv" in os.listdir('./Data/'):
+        df = pd.read_csv(f"{subreddit_name}_pure.csv")
+        print("Data read directly")
+    else:
+        # Scraping from scratch
+        df = scrape_posts_and_comments(subreddit_name=subreddit_name)
+        df.to_csv(f"Data/{subreddit_name}_pure_en.csv", index=False)
+        print(f"{subreddit_name} pure data was saved.")
 
     # If your request limit exceeded. Please select 'n'
     if user_input == "y":
