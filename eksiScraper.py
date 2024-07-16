@@ -50,8 +50,10 @@ def scrape_eksisozluk(url, max_pages):
 
 
 urls = {
-    'https://eksisozluk.com/agorafobi--54730': 9,
-    'https://eksisozluk.com/panik-atak--1337917': 155 
+    'https://eksisozluk.com/distimi--306507': 6,
+    'https://eksisozluk.com/distimik-bozukluk--1155620':2,
+    'https://eksisozluk.com/depresyon--33371': 400,
+    'https://eksisozluk.com/depresyon-belirtileri--248540':23 
 }
 
 all_entries = []
@@ -66,7 +68,7 @@ for url, max_pages in urls.items():
     print(f'Scraped and collected {len(entries)} entries for {title}')
 
 
-with open('eksisozluk_entries2.csv', 'w', encoding='utf-8', newline='') as file:
+with open('eksisozluk_entries1.csv', 'w', encoding='utf-8', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Title', 'Entry'])
     writer.writerows(all_entries)

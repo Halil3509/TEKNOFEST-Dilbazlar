@@ -89,7 +89,7 @@ def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
 
-    input_file = 'data4.csv'
+    input_file = 'eksisozluk_entries1.csv'
     df = pd.read_csv(input_file)
 
 
