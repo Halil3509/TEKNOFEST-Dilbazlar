@@ -2,3 +2,13 @@
 *.xml
 *.iml
 *.xlsx
+*.pth
+*.safetensors
+*.pt
+*.json
+*.bin
+*.wandb
+*.model
+Notebooks/wandb/*
+Notebooks/temp_disorder_detect/*
+*.pkl
