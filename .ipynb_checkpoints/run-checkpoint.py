@@ -12,7 +12,7 @@ else:
 
 
 # Define list
-subreddit_names = ["socialanxiety"]
+subreddit_names = ["depression_help"]
 
 
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
