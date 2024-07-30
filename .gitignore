@@ -13,4 +13,8 @@ Notebooks/wandb/*
 Notebooks/temp_disorder_detect/*
 *.pkl
 *.txt
+<<<<<<< Updated upstream
 *.arrow
+=======
+*.arrow
+>>>>>>> Stashed changes
