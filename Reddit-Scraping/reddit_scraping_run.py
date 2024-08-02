@@ -1,5 +1,5 @@
-from scraping import scrape_posts_and_comments
-from llm_filtering import filter_using_llm
+from reddit_scraping import scrape_posts_and_comments
+from groq_llm_filtering import filter_using_llm
 from tqdm import tqdm
 import sys
 import os
@@ -20,7 +20,7 @@ subreddit_names = ["socialanxiety"]
 for subreddit_name in tqdm(subreddit_names, desc="Reddit Scraping"):
 
     # If your process is incomplete.
-    if f"{subreddit_name}_pure.csv" in os.listdir('./Data/'):
+    if f"{subreddit_name}_pure.csv" in os.listdir('../Data/'):
         df = pd.read_csv(f"{subreddit_name}_pure.csv")
         print("Data read directly")
     else:
