@@ -16,4 +16,4 @@ Notebooks/temp_disorder_detect/*
 *.txt
 *.arrow
 *.parquet
-
+Chatbot/data/*
