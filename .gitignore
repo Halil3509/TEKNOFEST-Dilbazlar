@@ -9,9 +9,11 @@
 *.bin
 *.wandb
 *.model
+api_keys.txt
 Notebooks/wandb/*
 Notebooks/temp_disorder_detect/*
 *.pkl
 *.txt
 *.arrow
 *.parquet
+
