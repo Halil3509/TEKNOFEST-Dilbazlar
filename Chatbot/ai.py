@@ -81,6 +81,7 @@ class SOTA:
     def predict(model, tokenizer, labels, input_text):
         """
 
+        :param model:
         :param tokenizer:
         :param labels:
         :param input_text:
