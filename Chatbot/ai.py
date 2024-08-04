@@ -17,13 +17,15 @@ class SOTA:
         self.anxiety_labels = ['Agorafobi', 'Panik', 'Fobi', 'Seçici Dilsizlik', 'Sosyal Anksiyete']
         self.depression_labels = ['Distimi', 'PMDD']
         self.disorder_or_not_labels = ["Normal", "Hastalık"]
-        self.anx_dep_labels = ["Depresyon", "Anksiyete"]
+        self.depression_detect_labels = ["Normal", "Depresyon"]
+        self.anxiety_detect_labels = ["Normal", "Anksiyete"]
 
         self._setup_logger()
         self._connect_hugging_face()
         self.configs = get_configs()
         (self.anxiety_trainer, self.depression_trainer,
-         self.disorder_or_not_trainer, self.anx_dep_trainer) = self.load_models()
+         self.disorder_or_not_trainer, self.anx_detect_trainer,
+         self.dep_detect_trainer) = self.load_models()
 
     def _setup_logger(self):
         # Configure the logger
@@ -52,10 +54,11 @@ class SOTA:
         anxiety_model = self._load_single_model(model_url=self.configs["ANXIETY_MODEL_ID"], num_labels=5)
         depression_model = self._load_single_model(model_url=self.configs["DEPRESSION_MODEL_ID"], num_labels=2)
         disorder_or_not_model = self._load_single_model(model_url=self.configs["DISORDER_MODEL_ID"], num_labels=2)
-        anx_dep_model = self._load_single_model(model_url=self.configs["ANX_DEP_MODEL_ID"], num_labels=2)
+        anx_detect_model = self._load_single_model(model_url=self.configs["ANX_DETECT_MODEL_ID"], num_labels=2)
+        dep_detect_model = self._load_single_model(model_url=self.configs["DEP_DETECT_MODEL_ID"], num_labels=2)
 
         self.logger.info("All huggingface models have been loaded.")
-        return anxiety_model, depression_model, disorder_or_not_model, anx_dep_model
+        return anxiety_model, depression_model, disorder_or_not_model, anx_detect_model, dep_detect_model
 
     @staticmethod
     def _load_single_model(model_url: str, num_labels: int):
@@ -136,18 +139,35 @@ class SOTA:
 
         return label
 
-    def anx_dep_predict(self, sentence):
+    def anx_detect_predict(self, sentence):
         """
 
         :param sentence:
         :return:
         """
-        label, outputs_probs = self.predict(model=self.anx_dep_trainer['model'],
-                                            tokenizer=self.anx_dep_trainer['tokenizer'],
-                                            labels=self.anx_dep_labels,
+        label, outputs_probs = self.predict(model=self.anx_detect_trainer['model'],
+                                            tokenizer=self.anx_detect_trainer['tokenizer'],
+                                            labels=self.anxiety_detect_labels,
                                             input_text=sentence)
 
-        return label
+        self.logger.info(f"Anxiety detection model probs: {outputs_probs}")
+
+        return label, outputs_probs.logits
+
+    def dep_detect_predict(self, sentence):
+        """
+
+        :param sentence:
+        :return:
+        """
+        label, outputs_probs = self.predict(model=self.dep_detect_trainer['model'],
+                                            tokenizer=self.dep_detect_trainer['tokenizer'],
+                                            labels=self.depression_detect_labels,
+                                            input_text=sentence)
+
+        self.logger.info(f"Depression detection model probs: {outputs_probs}")
+
+        return label, outputs_probs.logits
 
     def disorder_or_not_predict(self, sentence):
         """
@@ -160,7 +180,11 @@ class SOTA:
                                             labels=self.disorder_or_not_labels,
                                             input_text=sentence)
 
-        return label
+        self.logger.info(f"Is disorder detection model probs: {outputs_probs}")
+        if float(outputs_probs.logits[0, 1]) > self.configs['is_disorder_threshold']:
+            return label
+        else:
+            return "Normal"
 
     def prediction_flow_standard(self, sentence):
         """
@@ -178,8 +202,36 @@ class SOTA:
         else: # Hastalık
             self.logger.info(f"This sentence is {is_disorder_result_label}")
 
-            dep_or_anx_result_label = self.anx_dep_predict(sentence)
-            self.logger.info(f"This sentence is {dep_or_anx_result_label}")
+            anx_result_label, anx_probs = self.anx_detect_predict(sentence)
+            dep_result_label, dep_probs = self.dep_detect_predict(sentence)
+            self.logger.info("Probs: " + str(dep_probs))
+            anx_dep_result = ""
+            if anx_probs[0, 1] > anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
+                anx_dep_result = "Depresyon"
+            elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]:
+                anx_dep_result = "Anxiety"
+            elif anx_probs[0, 0] > anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]: # There is not like anxiety or depression
+                if anx_probs[0, 1] > dep_probs[0, 1]:
+                    anx_dep_result = "Normal"
+                elif anx_probs[0, 1] < dep_probs[0, 1]:
+                    anx_dep_result = "Normal"
+
+            # Both of them are high
+            elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
+                if anx_probs[0, 1] > self.configs['anxiety_detection_threshold'] and dep_probs[0, 1] > self.configs['depression_detection_threshold']:
+                    anx_dep_result = "Anksiyete ve Depresyon"
+                elif anx_probs[0, 1] > self.configs['anxiety_detection_threshold']:
+                    anx_dep_result = "Anksiyete"
+                elif dep_probs[0, 1] > self.configs['depression_detection_threshold']:
+                    anx_dep_result = "Depresyon"
+                else: # If both of them are less then thresholds
+                    if anx_probs[0, 1] > dep_probs[0, 1]:
+                        anx_dep_result = "Anksiyete"
+                    elif anx_probs[0, 1] < dep_probs[0, 1]:
+                        anx_dep_result = "Depresyon"
+
+            self.logger.info("Anx Dep Result: ", anx_dep_result)
+
 
             if dep_or_anx_result_label == 'Depresyon':
                 depression_result_label = self.depression_predict(sentence)
