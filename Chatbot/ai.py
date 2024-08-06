@@ -1,3 +1,5 @@
+import numpy as np
+
 from utils import get_configs
 import logging
 import os
@@ -124,7 +126,7 @@ class SOTA:
                                             labels=self.anxiety_labels,
                                             input_text=sentence)
 
-        return label
+        return label, outputs_probs.logits
 
     def depression_predict(self, sentence):
         """
@@ -137,7 +139,7 @@ class SOTA:
                                             labels=self.depression_labels,
                                             input_text=sentence)
 
-        return label
+        return label, outputs_probs.logits
 
     def anx_detect_predict(self, sentence):
         """
@@ -195,6 +197,7 @@ class SOTA:
 
         # Is it disorder or not
         is_disorder_result_label = self.disorder_or_not_predict(sentence)
+        specific_result = ""
 
         if is_disorder_result_label == 'Normal':
             self.logger.info(f"This sentence is {is_disorder_result_label}")
@@ -206,6 +209,7 @@ class SOTA:
             dep_result_label, dep_probs = self.dep_detect_predict(sentence)
             self.logger.info("Probs: " + str(dep_probs))
             anx_dep_result = ""
+
             if anx_probs[0, 1] > anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
                 anx_dep_result = "Depresyon"
             elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]:
@@ -230,13 +234,39 @@ class SOTA:
                     elif anx_probs[0, 1] < dep_probs[0, 1]:
                         anx_dep_result = "Depresyon"
 
-            self.logger.info("Anx Dep Result: ", anx_dep_result)
+            self.logger.info(f"Anx Dep Result: {anx_dep_result}")
 
+            # Specific part of prediction
+            if anx_dep_result == 'Depresyon':
+                specific_result, dep_specific_probs = self.depression_predict(sentence)
+                if dep_specific_probs[0, np.argmax(dep_specific_probs)] < self.configs['depression_specific_threshold']:
+                    specific_result = "Depresyon"
+                self.logger.info(f"Depression Specific Probs: {dep_specific_probs}")
 
-            if dep_or_anx_result_label == 'Depresyon':
-                depression_result_label = self.depression_predict(sentence)
-                self.logger.info(f"This sentence is {depression_result_label}")
+            elif anx_dep_result == 'Anksiyete':
+                specific_result, anx_specific_probs = self.anxiety_predict(sentence)
+                if anx_specific_probs[0, np.argmax(anx_specific_probs)] < self.configs['anxiety_specific_threshold']:
+                    specific_result = "Anksiyete"
+                self.logger.info(f"Anxiety Specific Probs: {anx_specific_probs}")
 
-            else: # Anksiyete
-                anxiety_result_label = self.anxiety_predict(sentence)
-                self.logger.info(f"This sentence is {anxiety_result_label}")
+            elif anx_dep_result == 'Anksiyete ve Depresyon':
+                specific_result = []
+                specific_result_1, dep_specific_probs = self.depression_predict(sentence)
+                specific_result_2, anx_specific_probs = self.anxiety_predict(sentence)
+
+                # Conditions
+                if anx_specific_probs[0, np.argmax(anx_specific_probs)] < self.configs['anxiety_specific_threshold']:
+                    specific_result.append("Anxiety")
+                else:
+                    specific_result.append(specific_result_2)
+                if dep_specific_probs[0, np.argmax(dep_specific_probs)] < self.configs['depression_specific_threshold']:
+                    specific_result.append("Depression")
+                else:
+                    specific_result.append(specific_result_1)
+
+                self.logger.info(f"Depression Specific Probs: {dep_specific_probs}")
+                self.logger.info(f"Anxiety Specific Probs: {anx_specific_probs}")
+            else:
+                specific_result = "Normal"
+
+            self.logger.info(f"Specific Result: {specific_result}")

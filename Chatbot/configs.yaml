@@ -8,3 +8,6 @@ DEP_DETECT_MODEL_ID: "halilibr/dilbazlar-depression-binary-detection-model-acc-9
 is_disorder_threshold: 1.00
 anxiety_detection_threshold: 1.00
 depression_detection_threshold: 1.00
+
+depression_specific_threshold: 5.00
+anxiety_specific_threshold: 2.00
