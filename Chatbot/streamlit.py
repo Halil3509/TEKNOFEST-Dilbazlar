@@ -88,19 +88,14 @@ with st.sidebar:
     # TODO: Give user a chance to name chat
     st.session_state.chat_title = f'Chat-{st.session_state.chat_id}'
 
-    # Sample data
-    categories = ['Category A', 'Category B', 'Category C']
-    values = [10, 20, 15]
+
+    print("Percentages: ", st.session_state.sota.normalized_percentages)
+    fig = px.bar(x=list(st.session_state.sota.normalized_percentages.values()),
+                 y=list(st.session_state.sota.normalized_percentages.keys()),
+                 labels={'x':'Categories', 'y':'Values'},
+                 title="Sample Bar Plot")
 
 
-    fig = px.bar(x=categories, y=values, labels={'x':'Categories', 'y':'Values'}, title="Sample Bar Plot")
-
-    # Add title and labels
-    # ax.set_title('Sample Bar Plot')
-    # ax.set_xlabel('Categories')
-    # ax.set_ylabel('Values')
-
-    # Display the plot in the Streamlit app
     st.plotly_chart(fig)
 
 st.write('# Dilbazlar Chatbot')
@@ -125,6 +120,7 @@ except:
     ]
     print('new_cache made')
     st.session_state.sota.empty_cache()  ## Make counter 0
+
 
 st.session_state.model = genai.GenerativeModel('gemini-1.5-flash', safety_settings=safety_settings)
 st.session_state.chat = st.session_state.model.start_chat(
@@ -225,7 +221,11 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
     st.session_state.sota.disorder_ratio = st.session_state.sota.update_disorder_ratio()
     print("Updated disorder ratio: ", st.session_state.sota.disorder_ratio)
 
-    # Response Process
+    st.session_state.sota.update_percentages()  # Update percentages
+    st.rerun()
+
+
+    # Chatbot General Response Process
     if st.session_state.sota.message_counter > MESSAGE_NUMBER_THRESHOLD and \
             st.session_state.sota.disorder_ratio > DISORDER_RATIO:
 

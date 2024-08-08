@@ -25,6 +25,30 @@ class SOTA:
         self.message_counter = 0
         self.results = []
         self.disorder_ratio = 0
+        self.disorders_percentages = {
+            "Normal": 0,
+            "Depresyon": 0,
+            "Anksiyete": 0,
+            "PMDD": 0,
+            "Distimi": 0,
+            "Agorafobi": 0,
+            "Panik": 0,
+            "Fobi": 0,
+            "Seçici Dilsizlik": 0,
+            "Sosyal Anksiyete": 0
+        }
+        self.normalized_percentages = {
+            "Normal": 0,
+            "Depresyon": 0,
+            "Anksiyete": 0,
+            "PMDD": 0,
+            "Distimi": 0,
+            "Agorafobi": 0,
+            "Panik": 0,
+            "Fobi": 0,
+            "Seçici Dilsizlik": 0,
+            "Sosyal Anksiyete": 0
+        }
 
         self._setup_logger()
         self._connect_hugging_face()
@@ -51,6 +75,25 @@ class SOTA:
         # Add ch to logger
         self.logger.addHandler(ch)
 
+    def update_percentages(self):
+        """
+
+        :return:
+        """
+        for element in self.results:
+            self.disorders_percentages[element['result']] += 1
+
+        # Toplam yüzdesi hesapla
+        total_percentage = sum(self.disorders_percentages.values())
+
+
+        # Yüzdeleri normalize et
+        self.normalized_percentages = {k: (v / total_percentage) * 100 if total_percentage > 0 else 0
+                                  for k, v in self.disorders_percentages.items()}
+
+        self.logger.info("Percentages calculated")
+
+
     @staticmethod
     def _connect_hugging_face():
         api = HfApi(os.environ.get('HG_ACCESS_TOKEN'))
@@ -59,6 +102,19 @@ class SOTA:
     def empty_cache(self):
         self.message_counter = 0
         self.results = []
+
+        self.disorders_percentages = {
+            "Normal": 0,
+            "Depresyon": 0,
+            "Anksiyete": 0,
+            "PMDD": 0,
+            "Distimi": 0,
+            "Agorafobi": 0,
+            "Panik": 0,
+            "Fobi": 0,
+            "Seçici Dilsizlik": 0,
+            "Sosyal Anksiyete": 0
+        }
         self.logger.info("Counter and Results were cleaned.")
 
     def load_models(self):

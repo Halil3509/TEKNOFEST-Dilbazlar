@@ -5,7 +5,7 @@ ANX_DETECT_MODEL_ID: "halilibr/dilbazlar-anxiety-disorder-binary-detection-model
 DEP_DETECT_MODEL_ID: "halilibr/dilbazlar-depression-binary-detection-model-acc-98.3"
 
 
-is_disorder_threshold: 1.00
+is_disorder_threshold: 0.5
 anxiety_detection_threshold: 0.5
 depression_detection_threshold: 0.5
 
