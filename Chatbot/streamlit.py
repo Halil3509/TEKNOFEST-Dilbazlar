@@ -102,7 +102,7 @@ with st.sidebar:
     fig = px.bar(x=list(st.session_state.sota.normalized_percentages.values()),
                  y=list(st.session_state.sota.normalized_percentages.keys()),
                  labels={'x':'Yüzdeler', 'y':'Hastalıklar'},
-                 title="Sample Bar Plot")
+                 title="Mental Rahatsızlık Dağılım Grafiği")
 
 
     st.plotly_chart(fig)
@@ -254,7 +254,6 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
     print("Updated disorder ratio: ", st.session_state.sota.disorder_ratio)
 
     st.session_state.sota.update_percentages()  # Update percentages
-    st.rerun()
 
 
     # Chatbot General Response Process
@@ -275,7 +274,7 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
 
                         Uzman psikolog yorumu: 
                     """,
-            stream=True,
+            stream=True
         )
         # Display assistant response in chat message container
         with st.chat_message(
@@ -320,6 +319,8 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
             st.session_state.gemini_history,
             f'data/{st.session_state.chat_id}-gemini_messages',
         )
+
+        st.rerun()
 
 
 
