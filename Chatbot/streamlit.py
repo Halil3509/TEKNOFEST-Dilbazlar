@@ -9,6 +9,15 @@ import plotly.express as px
 
 from ai import SOTA
 import torch
+from PIL import Image
+
+
+im = Image.open("../dilbazlar.ico")
+st.set_page_config(
+    page_title="Dilbazlar",
+    page_icon=im,
+    layout="wide",
+)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -98,7 +107,17 @@ with st.sidebar:
 
     st.plotly_chart(fig)
 
-st.write('# Dilbazlar Chatbot')
+html_content = """
+<div style="display: flex; align-items: center; justify-content: center;">
+    <img src="https://bulutistan.com/blog/wp-content/uploads/2023/01/Depositphotos_13480629_S-800x443.jpg" alt="Left Image" style="width:100px;height:auto; margin-right: 20px;">
+    <h1 style="margin: 0;">Dilbazlar Chatbot</h1>
+    <img src="dilbazlar.jpg" alt="Right Image" style="width:100px;height:auto; margin-left: 20px;">
+</div>
+"""
+
+# Display the HTML in Streamlit
+st.markdown(html_content, unsafe_allow_html=True)
+
 
 # Chat history (allows to ask multiple questions)
 try:
@@ -212,11 +231,20 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
     print("AI is being run...")
     specific_result = st.session_state.sota.prediction_flow_standard(sentence=full_response)
 
-    # Add results
-    st.session_state.sota.results.append({
-        "message": prompt,
-        "result": specific_result
-    })
+    if isinstance(specific_result, list):
+        for sp in specific_result:
+            # Add results
+            st.session_state.sota.results.append({
+                "message": prompt,
+                "result": sp
+            })
+    else:
+        # Add results
+        st.session_state.sota.results.append({
+            "message": prompt,
+            "result": specific_result
+        })
+
 
     st.session_state.sota.disorder_ratio = st.session_state.sota.update_disorder_ratio()
     print("Updated disorder ratio: ", st.session_state.sota.disorder_ratio)
