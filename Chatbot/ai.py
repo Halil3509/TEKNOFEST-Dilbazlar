@@ -239,7 +239,7 @@ class SOTA:
             if anx_probs[0, 0] > anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
                 anx_dep_result = "Depresyon"
             elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]:
-                anx_dep_result = "Anxiety"
+                anx_dep_result = "Anksiyete"
             elif anx_probs[0, 0] > anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]: # There is not like anxiety or depression
                 # if anx_probs[0, 1] > dep_probs[0, 1]:
                 #     anx_dep_result = "Normal"

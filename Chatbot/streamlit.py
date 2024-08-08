@@ -4,7 +4,8 @@ import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
 import joblib
-from vertexai.preview.generative_models import Part, Content
+import matplotlib.pyplot as plt
+import plotly.express as px
 
 from ai import SOTA
 import torch
@@ -82,9 +83,25 @@ with st.sidebar:
             format_func=lambda x: past_chats.get(x, 'New Chat' if x != st.session_state.chat_id else st.session_state.chat_title),
             placeholder='_',
         )
+
     # Save new chats after a message has been sent to AI
     # TODO: Give user a chance to name chat
     st.session_state.chat_title = f'Chat-{st.session_state.chat_id}'
+
+    # Sample data
+    categories = ['Category A', 'Category B', 'Category C']
+    values = [10, 20, 15]
+
+
+    fig = px.bar(x=categories, y=values, labels={'x':'Categories', 'y':'Values'}, title="Sample Bar Plot")
+
+    # Add title and labels
+    # ax.set_title('Sample Bar Plot')
+    # ax.set_xlabel('Categories')
+    # ax.set_ylabel('Values')
+
+    # Display the plot in the Streamlit app
+    st.plotly_chart(fig)
 
 st.write('# Dilbazlar Chatbot')
 
