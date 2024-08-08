@@ -101,7 +101,7 @@ with st.sidebar:
     print("Percentages: ", st.session_state.sota.normalized_percentages)
     fig = px.bar(x=list(st.session_state.sota.normalized_percentages.values()),
                  y=list(st.session_state.sota.normalized_percentages.keys()),
-                 labels={'x':'Categories', 'y':'Values'},
+                 labels={'x':'Yüzdeler', 'y':'Hastalıklar'},
                  title="Sample Bar Plot")
 
 
@@ -109,9 +109,13 @@ with st.sidebar:
 
 html_content = """
 <div style="display: flex; align-items: center; justify-content: center;">
-    <img src="https://bulutistan.com/blog/wp-content/uploads/2023/01/Depositphotos_13480629_S-800x443.jpg" alt="Left Image" style="width:100px;height:auto; margin-right: 20px;">
+    <img src="https://private-user-images.githubusercontent.com/79845872/356342068-5d43fb9f-b59c-4222-ae53-57b89c96ab86.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjMxNDI5NjMsIm5iZiI6MTcyMzE0MjY2MywicGF0aCI6Ii83OTg0NTg3Mi8zNTYzNDIwNjgtNWQ0M2ZiOWYtYjU5Yy00MjIyLWFlNTMtNTdiODljOTZhYjg2LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA4MDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwODA4VDE4NDQyM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIyMWFhM2IyNTk3YWU1ZDdiZGMwMThiNDI4ZmYwMGEyZjViMTVjODgwYTZkNDQ5YjU5ZGY0OTFmZGQwODQ3ODAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.dRutiMCE-PYj-ZSIj6jC_0eDdDuqNFfaJlu39K8v6Ug"
+     alt="Left Image" style="width:100px;height:auto; margin-right: 20px;">
     <h1 style="margin: 0;">Dilbazlar Chatbot</h1>
-    <img src="dilbazlar.jpg" alt="Right Image" style="width:100px;height:auto; margin-left: 20px;">
+    <img src="https://austurkiye.org.tr/uploads/users/267-235.png" alt="Right Image" style="width:100px;height:auto; margin-left: 20px;">
+</div>
+<div style="display: flex; align-items: center; justify-content: center;">
+    <p>"Mental Sağlığına Göz Kırp" </p>
 </div>
 """
 
