@@ -1,0 +1,13 @@
+ANXIETY_MODEL_ID: "halilibr/dilbazlar-bert-uncased-anxiety-disorders-recognition-balanced-tr-model-acc-92.7"
+DEPRESSION_MODEL_ID: "halilibr/dilbazlar-depression-disorders-recognition-tr-model-acc-82"
+DISORDER_MODEL_ID: "halilibr/dilbazlar-binary-disorder-detection-model-acc-98.5"
+ANX_DETECT_MODEL_ID: "halilibr/dilbazlar-anxiety-disorder-binary-detection-model-acc-98.7"
+DEP_DETECT_MODEL_ID: "halilibr/dilbazlar-depression-binary-detection-model-acc-98.3"
+
+
+is_disorder_threshold: 0.5
+anxiety_detection_threshold: 0.5
+depression_detection_threshold: 0.5
+
+depression_specific_threshold: 5.00
+anxiety_specific_threshold: 2.00
