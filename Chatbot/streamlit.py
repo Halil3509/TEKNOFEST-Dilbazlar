@@ -109,7 +109,7 @@ with st.sidebar:
 
 html_content = """
 <div style="display: flex; align-items: center; justify-content: center;">
-    <img src="https://private-user-images.githubusercontent.com/79845872/356353832-aeff1d9f-8cde-466c-b3ed-6ca6d696b4cd.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjMxNDU0MjksIm5iZiI6MTcyMzE0NTEyOSwicGF0aCI6Ii83OTg0NTg3Mi8zNTYzNTM4MzItYWVmZjFkOWYtOGNkZS00NjZjLWIzZWQtNmNhNmQ2OTZiNGNkLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA4MDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwODA4VDE5MjUyOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTVkMDUwMDZmMTA2NmRkN2ExZWFhZTFhYzU2ZjU1YzEyZmM2ZTQ0N2Q4MGYzMmZlMGY3YzdmZTA3MDdmMjQ3YzgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.tBigkJBkp1RFVjacp4UgZGV8xfWOHO7GCB8f26Z-d1Y"
+    <img src="https://pbs.twimg.com/media/GUe-Q-OXMAAcbUz?format=jpg&name=small"
      alt="Left Image" style="width:100px;height:auto; margin-right: 20px;">
     <h1 style="margin: 0;">Dilbazlar Chatbot</h1>
     <img src="https://austurkiye.org.tr/uploads/users/267-235.png" alt="Right Image" style="width:100px;height:auto; margin-left: 20px;">
