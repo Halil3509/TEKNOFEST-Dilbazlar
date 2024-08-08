@@ -4,7 +4,6 @@ import streamlit as st
 import google.generativeai as genai
 from dotenv import load_dotenv
 import joblib
-import matplotlib.pyplot as plt
 import plotly.express as px
 
 from ai import SOTA
@@ -21,6 +20,7 @@ st.set_page_config(
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# Configuration
 MESSAGE_NUMBER_THRESHOLD = 1
 DISORDER_RATIO = 0.50
 
@@ -29,12 +29,15 @@ GOOGLE_API_KEY=os.environ.get('GOOGLE_API_KEY')
 
 @st.cache_resource
 def build_sota():
+    """
+    :return: Sota class
+    """
     return SOTA()
 
 # Load Models
 st.session_state.sota = build_sota()
 
-
+# Defining safety settings
 safety_settings = [
     {
         "category": "HARM_CATEGORY_HARASSMENT",
@@ -151,7 +154,6 @@ st.session_state.chat = st.session_state.model.start_chat(
 )
 
 
-# print(st.session_state.gemini_history)
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(
@@ -182,7 +184,7 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
         prompt,
         stream=True,
     )
-    st.session_state.sota.message_counter += 1 # Increasing message count
+    st.session_state.sota.message_counter += 1  # Increasing message count
     print(f"Counter increased. Counter is: {st.session_state.sota.message_counter}")
 
 
@@ -256,7 +258,7 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
     st.session_state.sota.update_percentages()  # Update percentages
 
 
-    # Chatbot General Response Process
+    # *** Chatbot Evaluated Response Part ***
     if st.session_state.sota.message_counter > MESSAGE_NUMBER_THRESHOLD and \
             st.session_state.sota.disorder_ratio > DISORDER_RATIO:
 
