@@ -11,6 +11,9 @@ import torch
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+MESSAGE_NUMBER_THRESHOLD = 1
+DISORDER_RATIO = 0.50
+
 load_dotenv()
 GOOGLE_API_KEY=os.environ.get('GOOGLE_API_KEY')
 
@@ -95,25 +98,22 @@ try:
     )
     print('old cache')
 except:
+
     st.session_state.messages = []
     st.session_state.gemini_history = [
-        # Content(
-        #     role="user",
-        #     parts=[
-        #         Part.from_text(
-        #                         """
-        #         My name is Ned. You are my personal assistant. My favorite movies are Lord of the Rings and Hobbit.
-        #         Who do you work for?
-        #         """
-        #         )
-        #     ],
-        # )
+        {
+            "role": "user",
+            "parts": [{"text": "Sen bir psikologsun. Kişiyle kısa kısa konuş ve ona bir psikologla konuşuyormuş gibi hissettir."}],
+        }
     ]
     print('new_cache made')
+    st.session_state.sota.empty_cache()  ## Make counter 0
+
 st.session_state.model = genai.GenerativeModel('gemini-1.5-flash', safety_settings=safety_settings)
 st.session_state.chat = st.session_state.model.start_chat(
     history=st.session_state.gemini_history,
 )
+
 
 # print(st.session_state.gemini_history)
 # Display chat messages from history on app rerun
@@ -133,6 +133,7 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
     # Display user message in chat message container
     with st.chat_message('user'):
         st.markdown(prompt)
+
     # Add user message to chat history
     st.session_state.messages.append(
         dict(
@@ -140,11 +141,15 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
             content=prompt,
         )
     )
-    ## Send message to AI
+    ## Send message to AIs
     response = st.session_state.chat.send_message(
         prompt,
         stream=True,
     )
+    st.session_state.sota.message_counter += 1 # Increasing message count
+    print(f"Counter increased. Counter is: {st.session_state.sota.message_counter}")
+
+
     # Display assistant response in chat message container
     with st.chat_message(
         name=MODEL_ROLE,
@@ -170,8 +175,6 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
         # Write full message with placeholder
         message_placeholder.write(full_response)
 
-        print("Run AI")
-        st.session_state.sota.prediction_flow_standard(sentence=full_response)
 
     # Add assistant response to chat history
     st.session_state.messages.append(
@@ -192,5 +195,83 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
         f'data/{st.session_state.chat_id}-gemini_messages',
     )
 
-    ## AI processes
+
+    print("AI is being run...")
+    specific_result = st.session_state.sota.prediction_flow_standard(sentence=full_response)
+
+    # Add results
+    st.session_state.sota.results.append({
+        "message": prompt,
+        "result": specific_result
+    })
+
+    st.session_state.sota.disorder_ratio = st.session_state.sota.update_disorder_ratio()
+    print("Updated disorder ratio: ", st.session_state.sota.disorder_ratio)
+
+    # Response Process
+    if st.session_state.sota.message_counter > MESSAGE_NUMBER_THRESHOLD and \
+            st.session_state.sota.disorder_ratio > DISORDER_RATIO:
+
+        evaluating_response = st.session_state.chat.send_message(
+            f"""
+                        Aşağıda bir kişinin chatbot ile konuşması ve bunun sonucunda her bir mesajına göre yapay zeka tespit edilmiş 
+                        mental rahatsızlık çıktıları yer almaktadır.
+
+                        Sen uzman bir psikologsun. JSON formatında verilen sonuçlar verisine bakarak *result anahtarı* çıktısının 
+                        *message anahtarı* göre inceleyip bunları kişiyi etik bir dille açıkla.
+                        
+                        result anahtarında çıkan çıktılara odaklan ve bunu kişilere uygun bir dille ifade et. 
+
+                        Sonuçlar: ```{st.session_state.sota.results}``` 
+
+                        Uzman psikolog yorumu: 
+                    """,
+            stream=True,
+        )
+        # Display assistant response in chat message container
+        with st.chat_message(
+                name=MODEL_ROLE,
+                avatar=AI_AVATAR_ICON,
+        ):
+            message_placeholder = st.empty()
+            full_response = ''
+            assistant_response = evaluating_response
+            # Streams in a chunk at a time
+            for chunk in evaluating_response:
+                # Simulate stream of chunk
+                # TODO: Chunk missing `text` if API stops mid-stream ("safety"?)
+
+                for i, ch in enumerate(chunk.text.split(' ')):
+                    if i == len(chunk.text.split(' ')) - 1:
+                        full_response += ch + ''
+                        time.sleep(0.05)
+                    else:
+                        full_response += ch + ' '
+                        time.sleep(0.05)
+                    # Rewrites with a cursor at end
+                    message_placeholder.write(full_response + '')
+            # Write full message with placeholder
+            message_placeholder.write(full_response)
+
+        # Add assistant response to chat history
+        st.session_state.messages.append(
+            dict(
+                role=MODEL_ROLE,
+                content=st.session_state.chat.history[-1].parts[0].text,
+                avatar=AI_AVATAR_ICON,
+            )
+        )
+        st.session_state.gemini_history = st.session_state.chat.history
+        # Save to file
+        joblib.dump(
+            st.session_state.messages,
+            f'data/{st.session_state.chat_id}-st_messages',
+        )
+        joblib.dump(
+            st.session_state.gemini_history,
+            f'data/{st.session_state.chat_id}-gemini_messages',
+        )
+
+
+
 

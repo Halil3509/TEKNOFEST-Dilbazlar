@@ -22,6 +22,10 @@ class SOTA:
         self.depression_detect_labels = ["Normal", "Depresyon"]
         self.anxiety_detect_labels = ["Normal", "Anksiyete"]
 
+        self.message_counter = 0
+        self.results = []
+        self.disorder_ratio = 0
+
         self._setup_logger()
         self._connect_hugging_face()
         self.configs = get_configs()
@@ -51,6 +55,11 @@ class SOTA:
     def _connect_hugging_face():
         api = HfApi(os.environ.get('HG_ACCESS_TOKEN'))
         print("Successfully logged in Huggingface!")
+
+    def empty_cache(self):
+        self.message_counter = 0
+        self.results = []
+        self.logger.info("Counter and Results were cleaned.")
 
     def load_models(self):
         anxiety_model = self._load_single_model(model_url=self.configs["ANXIETY_MODEL_ID"], num_labels=5)
@@ -114,6 +123,22 @@ class SOTA:
         prediction = preds.cpu().numpy()[0]
 
         return labels[prediction], outputs
+
+    def update_disorder_ratio(self):
+        temp_counter = 0
+        print("Results: ", self.results)
+
+        for element in self.results:
+            if element['result'] != 'Normal':
+                temp_counter += 1
+
+        print("temp_counter: ", temp_counter)
+        print("Length: ", len(self.results))
+
+        disorder_ratio = round(temp_counter/len(self.results), 2)
+        self.logger.info(f"Disorder was updated. Updated disorder ratio: {disorder_ratio}")
+
+        return disorder_ratio
 
     def anxiety_predict(self, sentence):
         """
@@ -202,23 +227,25 @@ class SOTA:
         if is_disorder_result_label == 'Normal':
             self.logger.info(f"This sentence is {is_disorder_result_label}")
 
+            return "Normal"
+
         else: # Hastalık
             self.logger.info(f"This sentence is {is_disorder_result_label}")
 
             anx_result_label, anx_probs = self.anx_detect_predict(sentence)
             dep_result_label, dep_probs = self.dep_detect_predict(sentence)
-            self.logger.info("Probs: " + str(dep_probs))
             anx_dep_result = ""
 
-            if anx_probs[0, 1] > anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
+            if anx_probs[0, 0] > anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
                 anx_dep_result = "Depresyon"
             elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]:
                 anx_dep_result = "Anxiety"
             elif anx_probs[0, 0] > anx_probs[0, 1] and dep_probs[0, 0] > dep_probs[0, 1]: # There is not like anxiety or depression
-                if anx_probs[0, 1] > dep_probs[0, 1]:
-                    anx_dep_result = "Normal"
-                elif anx_probs[0, 1] < dep_probs[0, 1]:
-                    anx_dep_result = "Normal"
+                # if anx_probs[0, 1] > dep_probs[0, 1]:
+                #     anx_dep_result = "Normal"
+                # elif anx_probs[0, 1] < dep_probs[0, 1]:
+                #     anx_dep_result = "Normal"
+                anx_dep_result = "Normal"
 
             # Both of them are high
             elif anx_probs[0, 0] < anx_probs[0, 1] and dep_probs[0, 0] < dep_probs[0, 1]:
@@ -256,11 +283,11 @@ class SOTA:
 
                 # Conditions
                 if anx_specific_probs[0, np.argmax(anx_specific_probs)] < self.configs['anxiety_specific_threshold']:
-                    specific_result.append("Anxiety")
+                    specific_result.append("Anksiyete")
                 else:
                     specific_result.append(specific_result_2)
                 if dep_specific_probs[0, np.argmax(dep_specific_probs)] < self.configs['depression_specific_threshold']:
-                    specific_result.append("Depression")
+                    specific_result.append("Depresyon")
                 else:
                     specific_result.append(specific_result_1)
 
@@ -270,3 +297,5 @@ class SOTA:
                 specific_result = "Normal"
 
             self.logger.info(f"Specific Result: {specific_result}")
+
+            return specific_result
