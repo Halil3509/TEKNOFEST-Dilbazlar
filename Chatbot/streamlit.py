@@ -21,7 +21,7 @@ st.set_page_config(
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-MESSAGE_NUMBER_THRESHOLD = 1
+MESSAGE_NUMBER_THRESHOLD = 3
 DISORDER_RATIO = 0.50
 
 load_dotenv()
@@ -320,7 +320,7 @@ if prompt := st.chat_input('Mesaj yazabilirsin'):
             f'data/{st.session_state.chat_id}-gemini_messages',
         )
 
-        st.rerun()
+    st.rerun()
 
 
 
