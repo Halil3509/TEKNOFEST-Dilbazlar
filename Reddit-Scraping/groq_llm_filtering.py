@@ -1,3 +1,7 @@
+"""
+This py file contains reddit scraping process by using llama3-70b-8192 in groq cloud.
+"""
+
 from tqdm import tqdm
 import re
 import pandas as pd
@@ -17,9 +21,9 @@ client = Groq(
 
 def submission_prediction(submission_text: str):
     """
-
-    :param submission_text:
-    :return:
+    Prediction process for groq cloud.
+    :param submission_text: submission text
+    :return: chatbot's response
     """
     chat_completion = client.chat.completions.create(
         messages=[
@@ -61,9 +65,10 @@ def submission_prediction(submission_text: str):
 
 def comment_prediction(comment_text: str) -> str:
     """
-
-    :param comment_text:
-    :return:
+    Reddit submissions are able to have comment. It is possible to look at comments. It is logical to scrape it.
+    This function is created for this purpose.
+    :param comment_text: Comment_text
+    :return: chatbot's response.
     """
     chat_completion = client.chat.completions.create(
         messages=[
@@ -101,9 +106,9 @@ def comment_prediction(comment_text: str) -> str:
 
 def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
     """
-
-    :param df:
-    :return:
+    Filtering process using LLM
+    :param df: unfiltered data in df format.
+    :return: filtered data in df format
     """
     wrong_error = 0
     filtered_llm_result_list = []
@@ -144,9 +149,9 @@ def filter_using_llm(df: pd.DataFrame) -> pd.DataFrame:
 
 def filter_comments_using_llm(comment_df: pd.DataFrame) -> list:
     """
-
-    :param comment_df:
-    :return:
+    Filtering process for comment by using llm
+    :param comment_df: unfiltered comment df
+    :return: filtered data
     """
     wrong_counter = 0
     result_data_list = []
