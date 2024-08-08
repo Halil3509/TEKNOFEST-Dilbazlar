@@ -110,7 +110,7 @@ with st.sidebar:
 html_content = """
 <div style="display: flex; align-items: center; justify-content: center;">
     <img src="https://pbs.twimg.com/media/GUe-Q-OXMAAcbUz?format=jpg&name=small"
-     alt="Left Image" style="width:100px;height:auto; margin-right: 20px;">
+     alt="Left Image" style="width:125px;height:auto; margin-right: 20px;">
     <h1 style="margin: 0;">Dilbazlar Chatbot</h1>
     <img src="https://austurkiye.org.tr/uploads/users/267-235.png" alt="Right Image" style="width:100px;height:auto; margin-left: 20px;">
 </div>
