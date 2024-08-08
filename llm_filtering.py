@@ -9,7 +9,7 @@ import os
 
 
 client = Groq(
-    api_key="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"
+    api_key=""
 )
 
 
