@@ -11,7 +11,7 @@ from groq import Groq
 load_dotenv()
 
 # Replace 'your_api_key_here' with your actual Groq API key
-api_key = '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'
+api_key = 'USE_YOUR_OWN_API_KEY'
 
 # Initialize Groq client with API key
 client = Groq(api_key=api_key)
@@ -96,7 +96,7 @@ def main():
     filtered_df = filter_using_llm(df)
 
 
-    output_file = 'filtered_entries4.csv'
+    output_file = 'filtered_entries1.csv'
     filtered_df.to_csv(output_file, index=False)
     print(f'Filtering complete. Filtered entries saved to {output_file}')
 
