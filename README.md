@@ -55,9 +55,9 @@ Model çıktıları:
 |---------------------------|----------|----------------|
 | [Hastalık mı değil mi Modeli](https://huggingface.co/halilibr/dilbazlar-binary-disorder-detection-model-acc-98.5)| %97,4       | %98,1          |
 | [Anksiyete İkili (Binary) Modeli](https://huggingface.co/halilibr/dilbazlar-anxiety-disorder-binary-detection-model-acc-98.7)     | %84.2     | %98,7          |
-| [Depresyon İkili (Binary) Modeli] (https://huggingface.co/halilibr/dilbazlar-depression-binary-detection-model-acc-98.3)     | %84.2     | %98,3         |
-| [Anksiyete Spesifik Modeli] (https://huggingface.co/halilibr/dilbazlar-bert-uncased-anxiety-disorders-recognition-balanced-tr-model-acc-92.7)     | %90,1     | %92,7          |
-| [Depresyon Spesifik Modeli] (https://huggingface.co/halilibr/dilbazlar-depression-disorders-recognition-tr-model-acc-84)  | %84.2     | %84          |
+| [Depresyon İkili (Binary) Modeli](https://huggingface.co/halilibr/dilbazlar-depression-binary-detection-model-acc-98.3)     | %84.2     | %98,3         |
+| [Anksiyete Spesifik Modeli](https://huggingface.co/halilibr/dilbazlar-bert-uncased-anxiety-disorders-recognition-balanced-tr-model-acc-92.7)     | %90,1     | %92,7          |
+| [Depresyon Spesifik Modeli](https://huggingface.co/halilibr/dilbazlar-depression-disorders-recognition-tr-model-acc-84)  | %84.2     | %84          |
 
 <br>
 
