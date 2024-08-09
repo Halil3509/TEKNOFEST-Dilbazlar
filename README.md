@@ -103,16 +103,20 @@ Chatbot olarak Gemini 1.5 flash modeli ücretsiz olarak kullanılmıştır. Kiş
 ## Nasıl Çalıştırılır? 🚀
 Sistem streamlit kütüphanesi kullanılarak ayağı kaldırılmaktadır. 
 
-Öncelikle yukarıda verilen linklerdeki verisetlerine erişim hakkı sağlamak zorundasınız. 
+1. Öncelikle yukarıda verilen linklerdeki verisetlerine erişim hakkı sağlamak zorundasınız. 
 
-Projenin ana yoluna gidiniz. (Projeyi pycharm veya vs code gibi IDE'lerden açarsanız, konsolda otomatik olarak gelecektir.)
-
-Sonrasında aşağıdaki kod parçasını çalıştırarak gerekli olan bütün kütüphaneleri indirin
+2. Projenin ana yoluna gidiniz. (Projeyi pycharm veya vs code gibi IDE'lerden açarsanız, konsolda otomatik olarak gelecektir.)
+3. Sonraki süreçte kendi API keylerinizi **.env** dosyası içerisinde aşağıda belirtilen yerlere yapıştırız:
+```python
+GOOGLE_API_KEY=<google_api_key>
+HG_ACCESS_TOKEN=<hugging_face_access_token>
+```
+4. Aşağıdaki kod parçasını çalıştırarak gerekli olan bütün kütüphaneleri indirin
 ```python
 pip install -r requirements.txt
 ```
 
-Bu işlemden sonra aşağıdaki kod satırlarını sırayla çalıştırarak ürünü kullanabilirsiniz. 
+4. Bu işlemden sonra aşağıdaki kod satırlarını sırayla çalıştırarak ürünü kullanabilirsiniz. 
 
 Not: İlk çalıştırma sırasında HuggingFace modellerinin indirilmesi zaman alacaktır.
 ```python
@@ -120,3 +124,10 @@ cd Chatbot
 
 streamlit run streamlit.py
 ```
+
+## Demo Videosu
+
+
+
+https://github.com/user-attachments/assets/6ca0264d-e4ff-48f0-bce8-1ed10239019e
+
