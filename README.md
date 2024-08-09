@@ -26,12 +26,12 @@ Buna ek olarak, Youtube yorumları ve Ekşi Sözlük verileri de kullanılarak o
 
 Elde edilen tüm veri seti, LLM modeli olan Gemini 1.5 Flash (ücretsiz versiyonu kullanılmıştır) ile augmentasyon işlemi uygulanarak genişletilmiştir.
 
-Bu işlemler sonucunda elde edilen Türkçe veri setleri:
-- **89,900** adet hasta veya normal olarak etiketlenmiş veri,
-- **43,400** adet anksiyete veya normal olarak etiketlenmiş veri,
-- **57,600** adet depresyon veya normal olarak etiketlenmiş veri,
-- **27,600** adet distimi veya PMDD (prementrüel disforik bozukluk) olarak etiketlenmiş veri,
-- **15,700** adet Agorafobi, Panik, Fobi, Seçici Dilsizlik, Sosyal Anksiyete olarak etiketlenmiş veriden oluşmaktadır.
+Bu işlemler sonucunda elde edilen Türkçe veri setlerimiz:
+- **89,900** adet hasta veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-disorder-detection-tr-dataset,
+- **43,400** adet anksiyete veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-anxiety-binary-tr-dataset,
+- **57,600** adet depresyon veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-binary-tr-dataset,
+- **27,600** adet distimi veya PMDD (premenstrüel disforik bozukluk) olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-recognition-multilabel-augmented-cleaned-tr-dataset,
+- **15,700** adet Agorafobi, Panik, Fobi, Seçici Dilsizlik, Sosyal Anksiyete olarak etiketlenmiş veriden oluşmaktadır -> https://huggingface.co/datasets/halilibr/dilbazlar-anxiety-disorders-recognition-not-augmented-not-anxiety-multilabel-tr-dataset.
 
 Bu çalışma, Türkiye literatüründe bu alanda yapılan ilk çalışma olma özelliğini taşımaktadır.
 
