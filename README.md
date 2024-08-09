@@ -1,12 +1,11 @@
 ## Dilbazlar Ekibi Kimdir?
 <img width=700px src='https://github.com/user-attachments/assets/b9976097-8bb3-46d8-8167-1f7443df5ede'> 
 
-Dilbazlar ekibi Teknofest Türkçe Doğal Dil İşleme yarışmasında yarışmak için kurulan 4 üyeden oluşan bir takımdır. Bilgisayar mühendisi Halil İbrahim Hatun, Muhammed Ensar Çıtak, Büşra Kurun ve lise öğrencisi Ahmet Akay'dan oluşmaktadır. Ekipte herkes veri kazıma ve veri temizleme aşamasında yer almıştır. Model eğitimi kısmında takım kaptanı Halil ve ekip üyesi Ensar çalışmalarını yürütürken Büşra ve Ahmet de dokümantasyonve test aşamalarını gerçekleştirmiştir.
+Dilbazlar ekibi Teknofest Türkçe Doğal Dil İşleme yarışmasında yarışmak için kurulan 4 üyeden oluşan bir takımdır. Bilgisayar mühendisleri Halil İbrahim Hatun ve Muhammed Ensar Çıtak, Bilgisayar mühendisliği 4. sınıf öğrencisi Büşra Kurun ve lise öğrencisi Ahmet Akay'dan oluşmaktadır. Ekipte herkes veri kazıma ve veri temizleme aşamasında yer almıştır. Model eğitimi kısmında takım kaptanı Halil ve ekip üyesi Ensar çalışmalarını yürütürken Büşra ve Ahmet de dokümantasyon ve test aşamalarını gerçekleştirmiştir.
 
 ## Proje Nedir?
 Bu proje, **DSM-5'e** dayalı olarak Anksiyete ve Depresyon bozukluklarını ele almaktadır. Projede, anksiyete ve depresyon gibi rahatsızlıklar; **Distimi, PMDD (Prementrüel Disforik Bozukluk), Agorafobi, Seçici Dilsizlik, Panik Bozukluk, Sosyal Anksiyete ve Fobi** gibi alt kategorilere ayrılmaktadır.
 
-Depresyon ve Anksiyete etiketleri, diğer etiketlerden farklı olarak model tarafından tespit edilen sonuçlara değil, belirlenen eşik değerlere dayalı olarak seçilir. Örneğin, Distimi ve PMDD üzerine tahmin yapan bir yapay zeka modeli, çıktıların belirlenen eşik değerin altında kalması durumunda otomatik olarak "Depresyon" olarak etiketlenecektir.
 
 ## Proje Aşamaları
 ![Proje Aşamaları](https://github.com/user-attachments/assets/164d3075-e0c6-4ec5-96c3-d5ab0d7976aa)
