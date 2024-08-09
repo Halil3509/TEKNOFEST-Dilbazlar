@@ -104,10 +104,10 @@ Kullanılan kod parçaları: [Chatbot Dosyası](https://github.com/Halil3509/TEK
 ## Nasıl Çalıştırılır? 🚀
 Sistem streamlit kütüphanesi kullanılarak ayağı kaldırılmaktadır. 
 
-1. Öncelikle yukarıda verilen linklerdeki verisetlerine erişim hakkı sağlamak zorundasınız. 
+1. Öncelikle yukarıda verilen linklerdeki veri setlerine erişim hakkı sağlamalısınız. 
 
 2. Projenin ana yoluna gidiniz. (Projeyi pycharm veya vs code gibi IDE'lerden açarsanız, konsolda otomatik olarak gelecektir.)
-3. Sonraki süreçte kendi API keylerinizi **.env** dosyası içerisinde aşağıda belirtilen yerlere yapıştırız:
+3. Sonraki süreçte **kendi API keylerinizi** **.env** dosyası içerisinde aşağıda belirtilen yerlere yapıştırız:
 ```python
 GOOGLE_API_KEY=<google_api_key>
 HG_ACCESS_TOKEN=<hugging_face_access_token>
