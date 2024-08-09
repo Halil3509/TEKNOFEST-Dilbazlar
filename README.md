@@ -87,6 +87,11 @@ Sistem streamlit kütüphanesi kullanılarak ayağı kaldırılmaktadır.
 
 Projenin ana yoluna gidiniz. (Projeyi pycharm veya vs code gibi IDE'lerden açarsanız, konsolda otomatik olarak gelecektir.)
 
+Sonrasında aşağıdaki kod parçasını çalıştırarak gerekli olan bütün kütüphaneleri indirin
+```python
+pip install -r requirements.txt
+```
+
 Bu işlemden sonra aşağıdaki kod satırlarını sırayla çalıştırarak ürünü kullanabilirsiniz. 
 
 Not: İlk çalıştırmada HuggingFace modellerinin indirilmesi zaman alacaktır.
