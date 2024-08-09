@@ -94,7 +94,7 @@ pip install -r requirements.txt
 
 Bu işlemden sonra aşağıdaki kod satırlarını sırayla çalıştırarak ürünü kullanabilirsiniz. 
 
-Not: İlk çalıştırmada HuggingFace modellerinin indirilmesi zaman alacaktır.
+Not: İlk çalıştırma sırasında HuggingFace modellerinin indirilmesi zaman alacaktır.
 ```python
 cd Chatbot
 
