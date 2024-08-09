@@ -14,7 +14,7 @@ Depresyon ve Anksiyete etiketleri, diğer etiketlerden farklı olarak model tara
 1. Veri Kazıma ve Önişleme
 2. Model Eğitimi
 3. Test ve Optimizasyon
-4. Chatbot Senaryolarının Oluşturulması
+4. Chatbot Seneryolarının Oluşturulması
 
 ### 1. Veri Kazıma ve Önişleme Aşaması
 
@@ -69,7 +69,7 @@ Test ve değerlendirme tarafında [tranformers-interpret](https://github.com/cdp
 Test olarak F1 ve Doğruluk metriklerinin yanı sıra günlük hayat örnek personalarıyla ürünün uygulanabilirliği test edilmiştir. (Diğer aşamada detaylara erişebilirsiniz.)
 
 
-### 4. Chatbot Senaryolarının Oluşturulması
+### 4. Chatbot Seneryolarının Oluşturulması
 ![WhatsApp Image 2024-08-09 at 1 34 14 PM](https://github.com/user-attachments/assets/c1288884-8cc9-491c-92f4-a8bb6cb4db91)
 
 Web arayüz olarak Streamlit kütüphanesi kullanılmıştır. Ana ekranda kullanıcı sol taraftan geçmiş konuşmalarına erişebilir veya yeni bir konuşma oluşturabilmektedir. Sol tarafta verilen grafik, 10 adet verilmiş etiketlerin girdiye bağlı olarak dağılımını canlık olarak göstermektedir. 
