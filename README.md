@@ -1,5 +1,5 @@
 ## Dilbazlar Ekibi Kimdir?
-![WhatsApp Image 2024-08-09 at 12 40 24 PM](https://github.com/user-attachments/assets/b9976097-8bb3-46d8-8167-1f7443df5ede)
+<img width=700px src='https://github.com/user-attachments/assets/b9976097-8bb3-46d8-8167-1f7443df5ede'> 
 
 Dilbazlar ekibi Teknofest Türkçe Doğal Dil İşleme yarışmasında yarışmak için kurulan 4 üyeden oluşan bir takımdır. Bilgisayar mühendisi Halil İbrahim Hatun, Muhammed Ensar Çıtak, Büşra Kurun ve lise öğrencisi Ahmet Akay'dan oluşmaktadır. Ekipte herkes veri kazıma ve veri temizleme aşamasında yer almıştır. Model eğitimi kısmında takım kaptanı Halil ve ekip üyesi Ensar çalışmalarını yürütürken Büşra ve Ahmet de dokümantasyonve test aşamalarını gerçekleştirmiştir.
 
@@ -34,6 +34,13 @@ Bu işlemler sonucunda elde edilen Türkçe veri setlerimiz:
 - [**15,700** adet Agorafobi, Panik, Fobi, Seçici Dilsizlik, Sosyal Anksiyete olarak etiketlenmiş veriden](https://huggingface.co/datasets/halilibr/dilbazlar-anxiety-disorders-recognition-not-augmented-not-anxiety-multilabel-tr-dataset) oluşmaktadır
   
 Bu çalışma, Türkiye literatüründe bu alanda yapılan ilk çalışma olma özelliğini taşımaktadır.
+
+Kullanılan Kod Parçaları:
+- [Youtube Scraping İşlemi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Youtube_Scraping.ipynb)
+- [Reddit Scraping Dosyası](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/tree/main/Reddit-Scraping)
+- []()
+- [LLM-based Augmentation](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Gemini_Augmentation.ipynb)
+- [Youtube Scraping İşlemi]()
 
 ### 2. Model Eğitimi
 ![image](https://github.com/user-attachments/assets/0f97f8b6-7d3d-4762-8d2f-ef6e8b258b0f)
