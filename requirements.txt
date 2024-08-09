@@ -1,3 +1,13 @@
 praw
 tqdm
 groq
+plotly
+matplotlib
+streamlit
+google-generativeai
+torch
+transformers
+huggingface_hub
+dotenv
+joblib
+pillow
