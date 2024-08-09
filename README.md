@@ -1,5 +1,7 @@
 ## Dilbazlar Ekibi Kimdir?
-Dilbazlar ekibi, İzmir Bakırçay Üniversitesi Bilgisayar Mühendisliği bölümünden Ensar Çıtak, Büşra Kurun, Halil İbrahim Hatun ve İzmir Atatürk Lisesi'nden Ahmet Akay'dan oluşmaktadır.
+![WhatsApp Image 2024-08-09 at 12 40 24 PM](https://github.com/user-attachments/assets/b9976097-8bb3-46d8-8167-1f7443df5ede)
+
+Dilbazlar ekibi Teknofest Türkçe Doğal Dil İşleme yarışmasında yarışmak için kurulan 4 üyeden oluşan bir takımdır. Bilgisayar mühendisi Halil İbrahim Hatun, Muhammed Ensar Çıtak, Büşra Kurun ve lise öğrencisi Ahmet Akay'dan oluşmaktadır. Ekipte herkes veri kazıma ve veri temizleme aşamasında yer almıştır. Model eğitimi kısmında takım kaptanı Halil ve ekip üyesi Ensar çalışmalarını yürütürken Büşra ve Ahmet de dokümantasyonve test aşamalarını gerçekleştirmiştir.
 
 ## Proje Nedir?
 Bu proje, DSM-5'e dayalı olarak Anksiyete ve Depresyon bozukluklarını ele almaktadır. Projede, anksiyete ve depresyon gibi rahatsızlıklar; Distimi, PMDD (Prementrüel Disforik Bozukluk), Agorafobi, Seçici Dilsizlik, Panik Bozukluk, Sosyal Anksiyete ve Fobi gibi alt kategorilere ayrılmaktadır.
@@ -25,7 +27,7 @@ Buna ek olarak, Youtube yorumları ve Ekşi Sözlük verileri de kullanılarak o
 Elde edilen tüm veri seti, LLM modeli olan Gemini 1.5 Flash (ücretsiz versiyonu kullanılmıştır) ile augmentasyon işlemi uygulanarak genişletilmiştir.
 
 Bu işlemler sonucunda elde edilen Türkçe veri setlerimiz:
-- **89,900** adet hasta veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-disorder-detection-tr-dataset,
+- [**89,900** adet hasta veya normal olarak etiketlenmiş veri](https://huggingface.co/datasets/halilibr/dilbazlar-disorder-detection-tr-dataset),
 - **43,400** adet anksiyete veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-anxiety-binary-tr-dataset,
 - **57,600** adet depresyon veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-binary-tr-dataset,
 - **27,600** adet distimi veya PMDD (premenstrüel disforik bozukluk) olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-recognition-multilabel-augmented-cleaned-tr-dataset,
@@ -68,7 +70,26 @@ Test olarak F1 ve Doğruluk metriklerinin yanı sıra günlük hayat örnek pers
 
 
 ### 4. Chatbot Senaryolarının Oluşturulması
+![WhatsApp Image 2024-08-09 at 1 34 14 PM](https://github.com/user-attachments/assets/c1288884-8cc9-491c-92f4-a8bb6cb4db91)
+
 Web arayüz olarak Streamlit kütüphanesi kullanılmıştır. Ana ekranda kullanıcı sol taraftan geçmiş konuşmalarına erişebilir veya yeni bir konuşma oluşturabilmektedir. Sol tarafta verilen grafik, 10 adet verilmiş etiketlerin girdiye bağlı olarak dağılımını canlık olarak göstermektedir. 
 
 Chatbot olarak Gemini 1.5 flash modeli ücretsiz olarak kullanılmıştır. Kişinin hastalık bağlamlı içerik bulundurma oranı verilen eşik değerini geçiyorsa Gemini'a rahatsızlık model sonuçları ifade edilir ve gemini da bunlar düzenli bir şekilde ifade eder. 
 
+
+
+## Nasıl Çalıştırılır?
+Sistem streamlit kütüphanesi kullanılarak ayağı kaldırılmaktadır. 
+
+Öncelikle yukarıda verilen linklerdeki verisetlerine erişim hakkı sağlamak zorundasınız. 
+
+Projenin ana yoluna gidiniz. (Projeyi pycharm veya vs code gibi IDE'lerden açarsanız, konsolda otomatik olarak gelecektir.)
+
+Bu işlemden sonra aşağıdaki kod satırlarını sırayla çalıştırarak ürünü kullanabilirsiniz. 
+
+Not: İlk çalıştırmada HuggingFace modellerinin indirilmesi zaman alacaktır.
+```python
+cd Chatbot
+
+streamlit run streamlit.py
+```
