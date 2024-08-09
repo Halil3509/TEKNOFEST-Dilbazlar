@@ -45,7 +45,7 @@ Model eğitiminde, ilk olarak bir içeriğin "hasta" olup olmadığını belirle
 
 Anksiyete tarafında Agorafobi, Fobi, Sosyal Anksiyete, Seçici Dilsizlik ve Panik Bozukluk; depresyon tarafında ise Distimi ve PMDD gibi hastalıklar detaylı modellerde ele alınmaktadır. Eğer anksiyete veya depresyon tarafında ağırlıklı sonuçlar eşik değerini aşamazsa, sonuçlar yalın olarak "Anksiyete" veya "Depresyon" olarak hesaplanır.
 
-### 3. Test ve Optimizasyon
+### 3. Test ve Optimizasyon 
 ![Screenshot 2024-08-09 122555](https://github.com/user-attachments/assets/b934cb77-ee39-436a-8a52-49dc088b6c5f)
 
 <br>
@@ -69,7 +69,7 @@ Test ve değerlendirme tarafında [tranformers-interpret](https://github.com/cdp
 Test olarak F1 ve Doğruluk metriklerinin yanı sıra günlük hayat örnek personalarıyla ürünün uygulanabilirliği test edilmiştir. (Diğer aşamada detaylara erişebilirsiniz.)
 
 
-### 4. Chatbot Seneryolarının Oluşturulması
+### 4. Chatbot Seneryolarının Oluşturulması 🤖
 ![WhatsApp Image 2024-08-09 at 1 34 14 PM](https://github.com/user-attachments/assets/c1288884-8cc9-491c-92f4-a8bb6cb4db91)
 
 Web arayüz olarak Streamlit kütüphanesi kullanılmıştır. Ana ekranda kullanıcı sol taraftan geçmiş konuşmalarına erişebilir veya yeni bir konuşma oluşturabilmektedir. Sol tarafta verilen grafik, 10 adet verilmiş etiketlerin girdiye bağlı olarak dağılımını canlık olarak göstermektedir. 
@@ -80,7 +80,7 @@ Chatbot olarak Gemini 1.5 flash modeli ücretsiz olarak kullanılmıştır. Kiş
 *Chatbot'un örnek bir seneryoya verdiği çıktı*
 ![WhatsApp Image 2024-08-09 at 1 52 10 PM](https://github.com/user-attachments/assets/a8ea8c86-fddd-49b5-a917-df2fb2eec1d9)
 
-## Nasıl Çalıştırılır?
+## Nasıl Çalıştırılır? 🚀
 Sistem streamlit kütüphanesi kullanılarak ayağı kaldırılmaktadır. 
 
 Öncelikle yukarıda verilen linklerdeki verisetlerine erişim hakkı sağlamak zorundasınız. 
