@@ -4,7 +4,7 @@
 Dilbazlar ekibi Teknofest Türkçe Doğal Dil İşleme yarışmasında yarışmak için kurulan 4 üyeden oluşan bir takımdır. Bilgisayar mühendisi Halil İbrahim Hatun, Muhammed Ensar Çıtak, Büşra Kurun ve lise öğrencisi Ahmet Akay'dan oluşmaktadır. Ekipte herkes veri kazıma ve veri temizleme aşamasında yer almıştır. Model eğitimi kısmında takım kaptanı Halil ve ekip üyesi Ensar çalışmalarını yürütürken Büşra ve Ahmet de dokümantasyonve test aşamalarını gerçekleştirmiştir.
 
 ## Proje Nedir?
-Bu proje, DSM-5'e dayalı olarak Anksiyete ve Depresyon bozukluklarını ele almaktadır. Projede, anksiyete ve depresyon gibi rahatsızlıklar; Distimi, PMDD (Prementrüel Disforik Bozukluk), Agorafobi, Seçici Dilsizlik, Panik Bozukluk, Sosyal Anksiyete ve Fobi gibi alt kategorilere ayrılmaktadır.
+Bu proje, **DSM-5'e** dayalı olarak Anksiyete ve Depresyon bozukluklarını ele almaktadır. Projede, anksiyete ve depresyon gibi rahatsızlıklar; **Distimi, PMDD (Prementrüel Disforik Bozukluk), Agorafobi, Seçici Dilsizlik, Panik Bozukluk, Sosyal Anksiyete ve Fobi** gibi alt kategorilere ayrılmaktadır.
 
 Depresyon ve Anksiyete etiketleri, diğer etiketlerden farklı olarak model tarafından tespit edilen sonuçlara değil, belirlenen eşik değerlere dayalı olarak seçilir. Örneğin, Distimi ve PMDD üzerine tahmin yapan bir yapay zeka modeli, çıktıların belirlenen eşik değerin altında kalması durumunda otomatik olarak "Depresyon" olarak etiketlenecektir.
 
@@ -20,9 +20,9 @@ Depresyon ve Anksiyete etiketleri, diğer etiketlerden farklı olarak model tara
 
 #### 1.1. Veri Toplama
 ![image](https://github.com/user-attachments/assets/2a420beb-d946-403b-97ba-951945eb540b)
-Veri kazıma aşamasında, X (Twitter) ve Reddit gibi sosyal medya platformlarından etiketli veriler toplanmış ve İngilizce bir veri seti oluşturulmuştur. Ardından, bu veriler HuggingFace'den **Helsinki-NLP/opus-mt-tc-big-en-tr** modeli kullanılarak Türkçeye çevrilmiştir.
+Veri kazıma aşamasında, **X (Twitter)** ve **Reddit** sosyal medya platformlarından etiketli veriler toplanmış ve İngilizce bir veri seti oluşturulmuştur. Ardından, bu veriler HuggingFace'den **Helsinki-NLP/opus-mt-tc-big-en-tr** modeli kullanılarak Türkçeye çevrilmiştir.
 
-Buna ek olarak, Youtube yorumları ve Ekşi Sözlük verileri de kullanılarak organik Türkçe veri elde edilmiştir. Bu veriler, çevrilmiş veri seti ile birleştirilmiştir.
+Buna ek olarak, **Youtube** yorumları ve **Ekşi Sözlük** verileri de kullanılarak **organik Türkçe** veri elde edilmiştir. Bu veriler, çevrilmiş veri seti ile birleştirilmiştir.
 
 Elde edilen tüm veri seti, LLM modeli olan Gemini 1.5 Flash (ücretsiz versiyonu kullanılmıştır) ile augmentasyon işlemi uygulanarak genişletilmiştir.
 
