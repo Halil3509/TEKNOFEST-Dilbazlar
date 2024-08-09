@@ -96,6 +96,8 @@ Web arayüz olarak Streamlit kütüphanesi kullanılmıştır. Ana ekranda kulla
 
 Chatbot olarak Gemini 1.5 flash modeli ücretsiz olarak kullanılmıştır. Kişinin hastalık bağlamlı içerik bulundurma oranı verilen eşik değerini geçiyorsa Gemini'a rahatsızlık model sonuçları ifade edilir ve gemini da bunlar düzenli bir şekilde ifade eder. 
 
+Kullanılan kod parçaları: [Chatbot Dosyası](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/tree/main/Chatbot)
+
 
 *Chatbot'un örnek bir seneryoya verdiği çıktı*
 ![WhatsApp Image 2024-08-09 at 1 52 10 PM](https://github.com/user-attachments/assets/a8ea8c86-fddd-49b5-a917-df2fb2eec1d9)
