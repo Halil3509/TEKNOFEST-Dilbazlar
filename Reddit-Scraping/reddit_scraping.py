@@ -4,9 +4,9 @@ from tqdm import tqdm
 import time
 
 reddit = praw.Reddit(
-    client_id="WsH2mzukYSiFLtYATnkq5A",
-    client_secret="HIR6kQSv7hbODotpnhsXN6KVqxA7iQ",
-    user_agent="temp",
+    client_id="<client_id>",
+    client_secret="<client_secret_id>",
+    user_agent="<user_agent>",
 )
 
 
