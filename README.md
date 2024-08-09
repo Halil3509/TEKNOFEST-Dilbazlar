@@ -36,11 +36,11 @@ Bu işlemler sonucunda elde edilen Türkçe veri setlerimiz:
 Bu çalışma, Türkiye literatüründe bu alanda yapılan ilk çalışma olma özelliğini taşımaktadır.
 
 Kullanılan Kod Parçaları:
+- [Çeviri İşlemi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/translation.ipynb)
 - [Youtube Scraping İşlemi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Youtube_Scraping.ipynb)
 - [Reddit Scraping Dosyası](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/tree/main/Reddit-Scraping)
-- []()
+- [Eksi Scraping Dosyası](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/tree/main/Eksi-Scraping)
 - [LLM-based Augmentation](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Gemini_Augmentation.ipynb)
-- [Youtube Scraping İşlemi]()
 
 ### 2. Model Eğitimi
 ![image](https://github.com/user-attachments/assets/0f97f8b6-7d3d-4762-8d2f-ef6e8b258b0f)
@@ -51,6 +51,17 @@ Model eğitimi sürecinde, BERT tabanlı önceden eğitilmiş modeller olan **db
 Model eğitiminde, ilk olarak bir içeriğin "hasta" olup olmadığını belirlemek amacıyla bir model geliştirilmiştir. Eğer hastalık tespiti yapılırsa, sistem anksiyete ve depresyon için iki ayrı ikili modele yönlendirilir. Anksiyete veya depresyon modelinin çıktısı belirlenen eşik değerini aşarsa, sistem bu hastalıklar üzerine çalışan detaylı modellere yönlendirilir.
 
 Anksiyete tarafında Agorafobi, Fobi, Sosyal Anksiyete, Seçici Dilsizlik ve Panik Bozukluk; depresyon tarafında ise Distimi ve PMDD gibi hastalıklar detaylı modellerde ele alınmaktadır. Eğer anksiyete veya depresyon tarafında ağırlıklı sonuçlar eşik değerini aşamazsa, sonuçlar yalın olarak "Anksiyete" veya "Depresyon" olarak hesaplanır.
+
+Kullanılan kod parçaları:
+- [Anksiyete Verisinin Oluşturulması](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Create_Anxiety_Data.ipynb)
+- [Augmente Edilmiş Verinin Oluşturulması](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Create_Augmented_Data.ipynb)
+- [Depresyon Verisinin Oluşturulması](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Create-Depression-Dataset.ipynb)
+- [Hasta mı değil mi modeli verisinin oluşturulması](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Disorder_Detection_Data_Creation.ipynb)
+- [Hasta mı değil mi modeli Eğitimi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Disorder_Detection_Model.ipynb)
+- [Depresyon Binary Model Eğitimi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Depression-Binary-Training.ipynb)
+- [Anksiyete Binary Model Eğitimi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Anxiety-Binary-Training.ipynb)
+- [Depresyon Hastalıkları Model Eğitimi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Depression-Disorders-Training.ipynb)
+- [Anksiyete Hastalıkları Model Eğitimi](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/Anxiety-Disorders-Training.ipynb)
 
 ### 3. Test ve Optimizasyon 
 ![Screenshot 2024-08-09 122555](https://github.com/user-attachments/assets/b934cb77-ee39-436a-8a52-49dc088b6c5f)
@@ -75,6 +86,8 @@ Test ve değerlendirme tarafında [tranformers-interpret](https://github.com/cdp
 
 Test olarak F1 ve Doğruluk metriklerinin yanı sıra günlük hayat örnek personalarıyla ürünün uygulanabilirliği test edilmiştir. (Diğer aşamada detaylara erişebilirsiniz.)
 
+Kullanılan kod parçaları:
+[Tranformers-interpreting](https://github.com/Halil3509/TEKNOFEST-Dilbazlar/blob/main/Notebooks/transformers_interpret.ipynb)
 
 ### 4. Chatbot Seneryolarının Oluşturulması 🤖
 ![WhatsApp Image 2024-08-09 at 1 34 14 PM](https://github.com/user-attachments/assets/c1288884-8cc9-491c-92f4-a8bb6cb4db91)
