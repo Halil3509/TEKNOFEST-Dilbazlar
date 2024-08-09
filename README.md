@@ -1,5 +1,3 @@
-![Dilbazlar](https://github.com/user-attachments/assets/5d43fb9f-b59c-4222-ae53-57b89c96ab86)
-
 ## Dilbazlar Ekibi Kimdir?
 Dilbazlar ekibi, İzmir Bakırçay Üniversitesi Bilgisayar Mühendisliği bölümünden Ensar Çıtak, Büşra Kurun, Halil İbrahim Hatun ve İzmir Atatürk Lisesi'nden Ahmet Akay'dan oluşmaktadır.
 
@@ -32,7 +30,7 @@ Bu işlemler sonucunda elde edilen Türkçe veri setlerimiz:
 - **57,600** adet depresyon veya normal olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-binary-tr-dataset,
 - **27,600** adet distimi veya PMDD (premenstrüel disforik bozukluk) olarak etiketlenmiş veri -> https://huggingface.co/datasets/halilibr/dilbazlar-depression-recognition-multilabel-augmented-cleaned-tr-dataset,
 - **15,700** adet Agorafobi, Panik, Fobi, Seçici Dilsizlik, Sosyal Anksiyete olarak etiketlenmiş veriden oluşmaktadır -> https://huggingface.co/datasets/halilibr/dilbazlar-anxiety-disorders-recognition-not-augmented-not-anxiety-multilabel-tr-dataset.
-
+  
 Bu çalışma, Türkiye literatüründe bu alanda yapılan ilk çalışma olma özelliğini taşımaktadır.
 
 ### 2. Model Eğitimi
@@ -46,7 +44,31 @@ Model eğitiminde, ilk olarak bir içeriğin "hasta" olup olmadığını belirle
 Anksiyete tarafında Agorafobi, Fobi, Sosyal Anksiyete, Seçici Dilsizlik ve Panik Bozukluk; depresyon tarafında ise Distimi ve PMDD gibi hastalıklar detaylı modellerde ele alınmaktadır. Eğer anksiyete veya depresyon tarafında ağırlıklı sonuçlar eşik değerini aşamazsa, sonuçlar yalın olarak "Anksiyete" veya "Depresyon" olarak hesaplanır.
 
 ### 3. Test ve Optimizasyon
-![image](https://github.com/user-attachments/assets/679bc18b-a7fd-482f-9841-3a4688e94b02)
+![Screenshot 2024-08-09 122555](https://github.com/user-attachments/assets/b934cb77-ee39-436a-8a52-49dc088b6c5f)
 
-Model çıktıları
+<br>
+
+Model çıktıları:
+| Model Adı                 | F1 Skoru | Doğruluk (Acc) |
+|---------------------------|----------|----------------|
+| Hastalık mı değil mi Modeli| %97,4       | %98,1          |
+| Anksiyete İkili (Binary) Modeli     | %84.2     | %98,7          |
+| Depresyon İkili (Binary) Modeli     | %84.2     | %98,3         |
+| Anksiyete Spesifik Modeli     | %90,1     | %92,7          |
+| Depresyon Spesifik Modeli  | %84.2     | %84          |
+
+<br>
+
 Test ve değerlendirme tarafında [tranformers-interpret](https://github.com/cdpierse/transformers-interpret) kütüphanesi kullanılmıştır. Bu sayede çıktıdaki kelimelerin hedef etiket ile nasıl çekinlendiği görülmektedir.
+
+*Depresyon spesifik modelinden çıkan Agorafobi çıktısının cümleyi çekimleme şekli:*
+![image](https://github.com/user-attachments/assets/1843952d-bc60-427d-862e-50ad32ea070b)
+
+Test olarak F1 ve Doğruluk metriklerinin yanı sıra günlük hayat örnek personalarıyla ürünün uygulanabilirliği test edilmiştir. (Diğer aşamada detaylara erişebilirsiniz.)
+
+
+### 4. Chatbot Senaryolarının Oluşturulması
+Web arayüz olarak Streamlit kütüphanesi kullanılmıştır. Ana ekranda kullanıcı sol taraftan geçmiş konuşmalarına erişebilir veya yeni bir konuşma oluşturabilmektedir. Sol tarafta verilen grafik, 10 adet verilmiş etiketlerin girdiye bağlı olarak dağılımını canlık olarak göstermektedir. 
+
+Chatbot olarak Gemini 1.5 flash modeli ücretsiz olarak kullanılmıştır. Kişinin hastalık bağlamlı içerik bulundurma oranı verilen eşik değerini geçiyorsa Gemini'a rahatsızlık model sonuçları ifade edilir ve gemini da bunlar düzenli bir şekilde ifade eder. 
+
